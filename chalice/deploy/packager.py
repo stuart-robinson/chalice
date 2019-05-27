@@ -4,6 +4,7 @@ import inspect
 import re
 import subprocess
 import logging
+import os
 from email.parser import FeedParser
 from email.message import Message  # noqa
 from zipfile import ZipFile  # noqa
@@ -54,7 +55,7 @@ class PackageDownloadError(Exception):
 
 
 class LambdaDeploymentPackager(object):
-    _CHALICE_LIB_DIR = 'chalicelib'
+    _CHALICE_LIB_DIR = os.environ.get('LIBDIR', 'chalicelib')
     _VENDOR_DIR = 'vendor'
 
     _RUNTIME_TO_ABI = {
